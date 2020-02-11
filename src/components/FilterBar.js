@@ -2,29 +2,37 @@ import React from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import { filterNews } from "../redux/actions/newsActions";
+import { useSelector, useDispatch } from 'react-redux'
 
-export default function SwitchLabels(props) {
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-  });
 
-  const handleChange = name => event => {
-    setState({ ...state, [name]: event.target.checked });
-  };
+export default function FilterBar(props) {
+
+  const [sources, setSources] = React.useState('');
+
+  const dispatch = useDispatch()
+  const redu = useSelector(state => state.newsListReducer)
+
+  // const [state, setState] = React.useState({
+  //   checkedA: true,
+  //   checkedB: true,
+  // });
+
+
+  const getSources = (source) => {
+  
+  }
+
+
+
+  
 
   return (
     <FormGroup row>
-    <FormControlLabel
-        control={
-          <Switch checked={props.nyt} onClick={(e) => props.getSourceCheck(e)} value="nyt" />
-        }
-        label="NY TIMES"
-        name = "nyt"
-      />
+    
       <FormControlLabel
         control={
-          <Switch checked={props.cnn} onClick={(e) => props.getSourceCheck(e)} value="cnn" />
+          <Switch checked={props.cnn} onClick={() => getSources(`techcrunch`)} value="cnn" />
           
         }
         label="CNN"

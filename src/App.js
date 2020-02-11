@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom';
-import Routes from './components/Routes';
 import Dashboard from "./components/Dashboard"
-import LogIn from './LogIn'
-import SignInSide from './SignInSide'
+import ReactLoading from 'react-loading';
+
 import SignIn from './SignIn'
-import SignUp from './SignUp'
-import Navi from "./components/Navi";
+
+// import Navi from "./components/Navi";
 
 
 
@@ -53,11 +52,14 @@ export default class App extends Component {
   }
   
   render() {
-    return (<main>
+    return (<main style={{
+      backgroundColor: '#FAFAFA'
+    }}>
       {
         this.isLoggedIn() 
         ? <>
-          <Navi checkNavi = {this.logOutUser}/>
+          {/* <Navi checkNavi = {this.logOutUser}/> */}
+
           <Dashboard token={ this.state.token } loggedInUserId={ this.state.loggedInUserId } />
           </> 
         : <SignIn logInUser={ this.logInUser } />
@@ -65,11 +67,7 @@ export default class App extends Component {
     </main>);
 
 
-    // return (
-    //   <Router>
-    //     <Routes />
-    //     </Router>
-    // )
+
   }
 }
 

@@ -1,16 +1,35 @@
 import React, { Component } from 'react'
-import ReactSearchBox from 'react-search-box'
-import SearchBar from 'material-ui-search-bar'
+import SearchBari from 'material-ui-search-bar'
 
 
-export default class App extends Component {
+import { bindActionCreators } from "redux";
+import * as newsActions from "../redux/actions/newsActions";
+import { connect } from "react-redux";
+
+
+
+class SearchBar extends Component {
+
+  state = {
+    word:''
+  }
+
+  searchSetState = (e) => {
+    
+this.setState({
+  word:e
+},this.searchSubmit)
+  }
+
+  searchSubmit = () => {
+    this.props.actions.searchNews(this.state.word)
+  }
   
-
     render() {
         return(
-            <SearchBar
-              onChange={(e) => this.props.handleValue(e)}
-              onRequestSearch={(e) => this.props.submitSearch(e)}
+            <SearchBari
+              onChange={(e) => this.searchSetState(e)}
+              onRequestSearch={(e) => this.searchSubmit(e)}
               value = ""
               style={{
                 margin: '0 auto',
@@ -23,4 +42,23 @@ export default class App extends Component {
           )
         }
     }
+
+
+    function mapStateToProps(state) {
+      return {
+        news: state.newsListReducer
+      };
+    }
+    
+    function mapDispatchToProps(dispatch) {
+      return {
+        actions: {
+          getNews: bindActionCreators(newsActions.getNews, dispatch),
+          filterNews: bindActionCreators(newsActions.filterNews, dispatch),
+          searchNews: bindActionCreators(newsActions.searchNews, dispatch)
+        }
+      };
+    }
+    
+    export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
     

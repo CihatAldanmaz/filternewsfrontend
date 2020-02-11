@@ -58,14 +58,14 @@ export default function NewsCard(props) {
   };
 
   useEffect(() => {
-    
-    if(props.favs.includes(props.news.title)){
-      setLanhadi(true); 
-       }
-        else{
-          setLanhadi(false);
+    // if(props.favs.includes(props.news.title)){
+    //   setLanhadi(true); 
+    //    }
+    //     else{
+    //       setLanhadi(false);
 
-        } 
+    //     } 
+
          }, []);
 
  
@@ -78,7 +78,7 @@ export default function NewsCard(props) {
   }
 
 const isFav = () => {
-  if(lanhadi){
+  if(props.favs.includes(props.news.title)){
     return <FavoriteIcon color="secondary" onClick = {handleFavClick} />
 
   }
@@ -92,7 +92,10 @@ const isFav = () => {
   // }
   
   
+  
+  console.log(props.favs)
    return (
+
      <Card className={classes.card}>
       <CardHeader
         avatar={
