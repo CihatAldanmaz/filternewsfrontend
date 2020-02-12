@@ -1,11 +1,15 @@
 import * as actionTypes from "./actionTypes"
 
-export function getNewsSuccess(news, isdone){
+export function getNewsSuccess(news){
+    
     return {
         type:actionTypes.GET_NEWS_SUCCESS,
         payload:news
+        
     }
 }
+
+
 
 export function getNews(categoryName){
     return function(dispatch){
@@ -17,7 +21,7 @@ export function getNews(categoryName){
         return fetch(url)
         .then(resp => resp.json())
         .then(result => 
-            dispatch(getNewsSuccess(result.articles,`done`))
+            dispatch(getNewsSuccess(result.articles))
             )
     }
 }

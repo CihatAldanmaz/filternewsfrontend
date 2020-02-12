@@ -3,12 +3,8 @@ import CategoryList from "./Menu.js";
 import { Row, Col } from "reactstrap";
 import NewsContainer from "./NewsContainer";
 import SearchBar from "./SearchBar";
-import { Button } from 'reactstrap';
 import LogOut from "./LogOut";
-
-
 import FilterBarr from "./FilterBarr.js";
-
 import axios from "axios";
 import alertify from "alertifyjs";
 import { bindActionCreators } from "redux";
@@ -20,7 +16,8 @@ import "../css/style.css";
 class Dashboard extends Component {
   state = {
     liked: [],
-    favorite_id: ""
+    favorite_id: "",
+    loading: true
   };
 
   slugify = str => {
@@ -59,14 +56,13 @@ class Dashboard extends Component {
 
   likeToNews = (e, info) => {
     let likes = this.state.liked.map(like => like.title);
-    
+
     const { loggedInUserId } = this.props;
     let new_url = this.slugify(info.url);
     let last_url = this.getLastCha(new_url);
     const { token } = this.props;
 
     if (likes.includes(info.title)) {
-      
       fetch(`http://localhost:3000/favorites/${last_url}`, {
         method: "delete",
         headers: {
@@ -122,24 +118,10 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.allFav();
-    
-    
   }
 
-  submitSearch = () => {
-    // fetch(
-    //   `https://newsapi.org/v2/top-headlines?country=us&q=${this.state.searchValue}&apiKey=72eb57002bca4d42a85404eef1e97d2a`
-    // )
-    //   .then(resp => resp.json())
-    //   .then(data =>
-    //     this.setState({
-    //       displayNews: data.articles
-    //     })
-    //   );
-  };
-
   render() {
-    console.log(this.state.liked)
+    console.log(this.state.liked);
     return (
       <div>
         <Row>
@@ -147,10 +129,8 @@ class Dashboard extends Component {
             <CategoryList />
           </Col>
           <Col xs="9" className="maincol">
-          <LogOut />
-            <SearchBar
-              
-            />
+            <LogOut />
+            <SearchBar />
 
             <Row>
               <Col xs="2"></Col>
@@ -158,6 +138,7 @@ class Dashboard extends Component {
                 <FilterBarr />
               </Col>
             </Row>
+
             <NewsContainer
               likeToNews={this.likeToNews}
               favs={this.state.liked}

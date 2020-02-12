@@ -52,11 +52,10 @@ img {
     clear: both;
 }
 
-/* html,
+html,
 body {
-    height: 100%;
-    display: flex;
-} */
+    background-color: #FAFAFA;
+} 
 
 .button {
     background-color:#3E51B5; /* Green */
@@ -70,8 +69,8 @@ body {
     font-size: 16px;
     font-family: roboto;
     cursor: pointer;
-    position: absolute;
-    right: 0px;
+    position: fixed;
+    right: 25px;
     transition: 0.3s;
   }
 

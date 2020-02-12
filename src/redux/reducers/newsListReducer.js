@@ -1,4 +1,4 @@
-import * as actionTypes from "./../../actions/actionTypes"
+import * as actionTypes from "../actions/actionTypes"
 import initialState from "./initialState";
 
 export default function newsListReducer(state=initialState.news,action){
