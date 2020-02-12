@@ -84,7 +84,7 @@ export default function NewsCard(props) {
         title={props.news.title.slice(0, 45).concat("...")}
         subheader={props.news.publishedAt}
       />
-      <CardMedia
+      <CardMedia href={props.news.url}
         className={classes.media}
         image={props.news.urlToImage}
         title="Paella dish"
