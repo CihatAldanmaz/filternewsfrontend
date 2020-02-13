@@ -75,16 +75,7 @@ class FfilterBarr extends Component {
           name="cbs"
         />
 
-        <FormControlLabel
-          control={
-            <Switch
-              onClick={() => this.getSources(`the-washington-post,`)}
-              value="twp"
-            />
-          }
-          label="The Washington Post"
-          name="twp"
-        />
+       
       </FormGroup>
     );
   }
