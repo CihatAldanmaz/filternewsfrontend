@@ -64,7 +64,7 @@ export default function SignIn(props) {
  
   const logInSubmit = event => {
       event.preventDefault()
-    fetch("http://localhost:3000/tokens", {
+    fetch("https://filter-newss.herokuapp.com/tokens", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
