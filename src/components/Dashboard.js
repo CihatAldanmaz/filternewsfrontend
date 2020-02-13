@@ -63,7 +63,7 @@ class Dashboard extends Component {
     const { token } = this.props;
 
     if (likes.includes(info.title)) {
-      fetch(`http://localhost:3000/favorites/${last_url}`, {
+      fetch(`https://filter-newss.herokuapp.com/favorites/${last_url}`, {
         method: "delete",
         headers: {
           "Content-type": "application/json",
@@ -77,7 +77,7 @@ class Dashboard extends Component {
     } else {
       axios({
         method: "post",
-        url: "http://localhost:3000/favorites",
+        url: "https://filter-newss.herokuapp.com/favorites",
         data: {
           title: info.title,
           description: info.description,
@@ -102,7 +102,7 @@ class Dashboard extends Component {
     const { loggedInUserId } = this.props;
 
     if (loggedInUserId) {
-      fetch(`http://localhost:3000/users/${loggedInUserId}`, {
+      fetch(`https://filter-newss.herokuapp.com/users/${loggedInUserId}`, {
         headers: {
           Authorization: token
         }
