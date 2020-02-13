@@ -15,7 +15,7 @@ export function getNews(categoryName){
     return function(dispatch){
         let url = `https://newsapi.org/v2/top-headlines?sources=the-new-york-times,cnn,the-wall-street-journal,abc-news,fox-news,cbs-news,the-washington-post,&apiKey=!!apkey!!&pageSize=100`;
         if(categoryName){
-            url = `https://newsapi.org/v2/top-headlines?country=us&category=${categoryName}&apiKey=!!apkey!!&pageSize=100`
+            url = `https://newsapi.org/v2/top-headlines?country=us&category=${categoryName}&apiKey=72eb57002bca4d42a85404eef1e97d2a&pageSize=100`
         }
         
         return fetch(url)
@@ -28,7 +28,7 @@ export function getNews(categoryName){
 
 export function filterNews(source){
     return function(dispatch){
-        let url = `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=!!apkey!!&pageSize=100`
+        let url = `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=72eb57002bca4d42a85404eef1e97d2a&pageSize=100`
         return fetch(url)
         .then(resp => resp.json())
         .then(result => dispatch(getNewsSuccess(result.articles)))
@@ -37,7 +37,7 @@ export function filterNews(source){
 
 export function searchNews(word){
     return function(dispatch){
-       let url = `https://newsapi.org/v2/top-headlines?country=us&q=${word}&apiKey=!!apikey!!`
+       let url = `https://newsapi.org/v2/top-headlines?country=us&q=${word}&apiKey=72eb57002bca4d42a85404eef1e97d2a`
     
 
     return fetch(url)
