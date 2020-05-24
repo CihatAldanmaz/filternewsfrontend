@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import Dashboard from "./components/Dashboard";
 import SignIn from "./SignIn";
+import BodyBackgroundColor from "react-body-backgroundcolor";
+import "./css/style.css";
 
 export default class App extends Component {
   state = {
     loggedInUserId: localStorage.userId,
-    token: localStorage.token
+    token: localStorage.token,
   };
 
   componentDidMount() {
     this.setState({
-      token: localStorage.token
+      token: localStorage.token,
     });
   }
 
@@ -24,7 +26,7 @@ export default class App extends Component {
     localStorage.userId = userId;
     this.setState({
       token: token,
-      loggedInUserId: userId
+      loggedInUserId: userId,
     });
   };
 
@@ -33,17 +35,13 @@ export default class App extends Component {
     delete localStorage.userId;
     this.setState({
       token: null,
-      loggedInUserId: null
+      loggedInUserId: null,
     });
   };
 
   render() {
     return (
-      <main
-        style={{
-          backgroundColor: "#FAFAFA"
-        }}
-      >
+      <main>
         {this.isLoggedIn() ? (
           <>
             <Dashboard
@@ -52,7 +50,9 @@ export default class App extends Component {
             />
           </>
         ) : (
-          <SignIn logInUser={this.logInUser} />
+          <BodyBackgroundColor backgroundColor="#3F51B5">
+            <SignIn logInUser={this.logInUser} />
+          </BodyBackgroundColor>
         )}
       </main>
     );
