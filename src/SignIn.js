@@ -1,8 +1,79 @@
 import React, { useState } from "react";
-import "./css/signin.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import Typical from "react-typical";
+import styled from "styled-components";
+
+const Component = styled.div``;
+
+const Typ = styled.div`
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  font-size: 30px;
+  font-family: roboto;
+  transform: translate(-50%, -50%);
+
+  color: #e9eeeb;
+`;
+
+const Mainsection = styled.section`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #e9eeeb;
+
+  .login-box {
+    width: 440px;
+    @media (max-width: 600px) {
+      width: 340px;
+    }
+  }
+
+  .login-box h1 {
+    font-size: 40px;
+    border-bottom: 6px solid #e9eeeb;
+    margin-bottom: 50px;
+    padding: 13px 0;
+  }
+
+  .textbox {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    font-size: 20px;
+    padding: 8px 0;
+    margin: 8px 0;
+    border-bottom: 1px solid #e9eeeb;
+  }
+
+  .textbox i {
+    width: 26px;
+    float: left;
+    text-align: center;
+  }
+
+  .textbox input {
+    margin-left: 20px;
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+    font-size: 22px;
+    width: 100%;
+    float: left;
+  }
+
+  button {
+    width: 100%;
+    height: 40px;
+    font-size: 22px;
+    background: none;
+    border: 3px solid #e9eeeb;
+    color: #e9eeeb;
+  }
+`;
 
 export default function SignIn(props) {
   const [logIn, setLogIn] = useState(false);
@@ -44,8 +115,8 @@ export default function SignIn(props) {
   };
 
   return (
-    <div>
-      <p className="typical">
+    <Component>
+      <Typ>
         The News from{" "}
         <Typical
           loop={5}
@@ -63,31 +134,35 @@ export default function SignIn(props) {
             3000,
           ]}
         />
-      </p>
+      </Typ>
 
-      <section className="main">
+      <Mainsection>
         <div className="login-box">
           <h1>Login</h1>
-          <div className="textbox">
-            <FontAwesomeIcon icon={faUser} />
-            <input
-              type="text"
-              placeholder="Username"
-              onChange={onChangeUsername}
-            />
-          </div>
-          <div className="textbox">
-            <FontAwesomeIcon icon={faLock} />
-            <input
-              type="password"
-              placeholder="Password"
-              onChange={onChangePassword}
-            />
-          </div>
-          <button onClick={logInSubmit}>Sign In</button>
+          <h6>Username:guest Password:guest</h6>
+
+          <form onSubmit={(e) => logInSubmit(e)}>
+            <div className="textbox">
+              <FontAwesomeIcon icon={faUser} />
+              <input
+                type="text"
+                placeholder="Username"
+                onChange={onChangeUsername}
+              />
+            </div>
+            <div className="textbox">
+              <FontAwesomeIcon icon={faLock} />
+              <input
+                type="password"
+                placeholder="Password"
+                onChange={onChangePassword}
+              />
+            </div>
+            <button type="submit">Sign In</button>
+          </form>
         </div>
-      </section>
-    </div>
+      </Mainsection>
+    </Component>
   );
 }
 

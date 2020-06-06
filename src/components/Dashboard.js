@@ -9,18 +9,63 @@ import axios from "axios";
 import alertify from "alertifyjs";
 import { bindActionCreators } from "redux";
 import * as newsActions from "../redux/actions/newsActions";
-
 import { connect } from "react-redux";
 import "../css/style.css";
+import styled from "styled-components";
+
+const Gmain = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 9fr;
+  grid-template-areas: "sidegrid maingrid";
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 50px 6fr;
+    grid-template-areas: "sidegrid maingrid ";
+    justify-content: center;
+  }
+`;
+
+const Sgrid = styled.div`
+  grid-area: sidegrid;
+`;
+
+const Mgrid = styled.div`
+  grid-area: maingrid;
+  display: grid;
+  background: #fafafa;
+  justify-items: center;
+
+  .button {
+    background-color: #3e51b5;
+    color: white;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: roboto;
+    cursor: pointer;
+    position: fixed;
+    right: 25px;
+    transition: 0.3s;
+  }
+`;
+
+const Rgrid = styled.div`
+  grid-area: rightgrid;
+  background: #fafafa;
+`;
 
 class Dashboard extends Component {
   state = {
     liked: [],
     favorite_id: "",
-    loading: true
+    loading: true,
   };
 
-  slugify = str => {
+  slugify = (str) => {
     str = str.replace(/^\s+|\s+$/g, "");
 
     // Make the string lowercase
@@ -46,7 +91,7 @@ class Dashboard extends Component {
     return str;
   };
 
-  getLastCha = word => {
+  getLastCha = (word) => {
     if (word.slice(-1) === "-") {
       return word.slice(0, -1);
     } else {
@@ -55,7 +100,7 @@ class Dashboard extends Component {
   };
 
   likeToNews = (e, info) => {
-    let likes = this.state.liked.map(like => like.title);
+    let likes = this.state.liked.map((like) => like.title);
 
     const { loggedInUserId } = this.props;
     let new_url = this.slugify(info.url);
@@ -67,11 +112,11 @@ class Dashboard extends Component {
         method: "delete",
         headers: {
           "Content-type": "application/json",
-          Authorization: token
-        }
+          Authorization: token,
+        },
       }).then(
         this.setState({
-          liked: this.state.liked.filter(like => like.title !== info.title)
+          liked: this.state.liked.filter((like) => like.title !== info.title),
         })
       );
     } else {
@@ -85,11 +130,11 @@ class Dashboard extends Component {
           news_url: info.url,
           date: info.publishedAt,
           user_id: loggedInUserId,
-          istrue: true
-        }
+          istrue: true,
+        },
       }).then(
         this.setState({
-          liked: [...this.state.liked, info]
+          liked: [...this.state.liked, info],
         }),
         alertify.success("You Liked " + info.title)
       );
@@ -104,13 +149,13 @@ class Dashboard extends Component {
     if (loggedInUserId) {
       fetch(`https://filter-newss.herokuapp.com/users/${loggedInUserId}`, {
         headers: {
-          Authorization: token
-        }
+          Authorization: token,
+        },
       })
-        .then(res => res.json())
-        .then(user =>
+        .then((res) => res.json())
+        .then((user) =>
           this.setState({
-            liked: user.favorites
+            liked: user.favorites,
           })
         );
     }
@@ -123,36 +168,30 @@ class Dashboard extends Component {
   render() {
     console.log(this.state.liked);
     return (
-      <div>
-        <Row>
-          <Col xs="2">
-            <CategoryList />
-          </Col>
-          <Col xs="9" className="maincol">
-            <LogOut />
-            <SearchBar />
+      <Gmain>
+        <Sgrid>
+          <CategoryList />
+        </Sgrid>
+        <Mgrid>
+          <SearchBar />
+          <FilterBarr />
 
-            <Row>
-              <Col xs="2"></Col>
-              <Col>
-                <FilterBarr />
-              </Col>
-            </Row>
-
-            <NewsContainer
-              likeToNews={this.likeToNews}
-              favs={this.state.liked}
-            />
-          </Col>
-        </Row>
-      </div>
+          <NewsContainer likeToNews={this.likeToNews} favs={this.state.liked} />
+          <button
+            class="button button2"
+            onClick={() => this.props.logOutUser()}
+          >
+            Log Out
+          </button>
+        </Mgrid>
+      </Gmain>
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    news: state.newsListReducer
+    news: state.newsListReducer,
   };
 }
 
@@ -160,8 +199,8 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       getNews: bindActionCreators(newsActions.getNews, dispatch),
-      filterNews: bindActionCreators(newsActions.filterNews, dispatch)
-    }
+      filterNews: bindActionCreators(newsActions.filterNews, dispatch),
+    },
   };
 }
 

@@ -47,6 +47,7 @@ export default class App extends Component {
             <Dashboard
               token={this.state.token}
               loggedInUserId={this.state.loggedInUserId}
+              logOutUser={this.logOutUser}
             />
           </>
         ) : (

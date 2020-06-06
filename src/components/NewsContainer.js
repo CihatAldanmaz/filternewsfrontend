@@ -12,7 +12,7 @@ class NewsContainer extends Component {
   }
 
   favsMapping = () => {
-    return this.props.favs.map(fav => {
+    return this.props.favs.map((fav) => {
       return fav.title;
     });
   };
@@ -21,7 +21,7 @@ class NewsContainer extends Component {
     return (
       <div>
         <Grid container spacing={80} style={{ padding: 24 }}>
-          {this.props.news.map(news => (
+          {this.props.news.map((news) => (
             <Grid item xs={12} sm={6} lg={4} xl={3}>
               <NewsCard
                 news={news}
@@ -39,15 +39,15 @@ class NewsContainer extends Component {
 function mapStateToProps(state) {
   return {
     news: state.newsListReducer,
-    deneme: state.denemeReducer
+    deneme: state.denemeReducer,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      getNews: bindActionCreators(newsActions.getNews, dispatch)
-    }
+      getNews: bindActionCreators(newsActions.getNews, dispatch),
+    },
   };
 }
 
