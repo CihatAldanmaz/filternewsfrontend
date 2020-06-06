@@ -108,8 +108,6 @@ export default function SignIn(props) {
   };
 
   const onChangePassword = (event) => {
-    console.log("password", event.target.value);
-
     setPassword(event.target.value);
   };
 
