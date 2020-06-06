@@ -16,32 +16,32 @@ import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import TelegramIcon from "@material-ui/icons/Telegram";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   card: {
     Width: 300,
 
     maxHeight: 750,
     minHeight: 450,
     marginBottom: "12.25%",
-    marginRight: "10.25%"
+    marginRight: "10.25%",
   },
   media: {
     height: 0,
-    paddingTop: "56.25%" // 16:9
+    paddingTop: "56.25%", // 16:9
   },
   expand: {
     transform: "rotate(0deg)",
     marginLeft: "auto",
     transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest
-    })
+      duration: theme.transitions.duration.shortest,
+    }),
   },
   expandOpen: {
-    transform: "rotate(180deg)"
+    transform: "rotate(180deg)",
   },
   avatar: {
-    backgroundColor: red[500]
-  }
+    backgroundColor: red[500],
+  },
 }));
 
 export default function NewsCard(props) {
@@ -53,7 +53,7 @@ export default function NewsCard(props) {
     setExpanded(!expanded);
   };
 
-  const handleFavClick = event => {
+  const handleFavClick = (event) => {
     setFavboolean(!Favboolean);
   };
 
@@ -65,7 +65,6 @@ export default function NewsCard(props) {
     }
   };
 
-  console.log(props.favs);
   return (
     <Card className={classes.card}>
       <CardHeader
@@ -84,7 +83,8 @@ export default function NewsCard(props) {
         title={props.news.title.slice(0, 45).concat("...")}
         subheader={props.news.publishedAt}
       />
-      <CardMedia href={props.news.url}
+      <CardMedia
+        href={props.news.url}
         className={classes.media}
         image={props.news.urlToImage}
         title="Paella dish"
@@ -100,7 +100,7 @@ export default function NewsCard(props) {
       <CardActions disableSpacing>
         <IconButton
           aria-label="add to favorites"
-          onClick={e => props.likeToNews(e, props.news)}
+          onClick={(e) => props.likeToNews(e, props.news)}
         >
           {isFav()}
         </IconButton>
@@ -109,7 +109,7 @@ export default function NewsCard(props) {
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded
+            [classes.expandOpen]: expanded,
           })}
           onClick={handleExpandClick}
           aria-expanded={expanded}

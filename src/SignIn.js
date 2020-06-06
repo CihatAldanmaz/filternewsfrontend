@@ -104,7 +104,6 @@ export default function SignIn(props) {
   };
 
   const onChangeUsername = (event) => {
-    console.log("username", event.target.value);
     setUsername(event.target.value);
   };
 

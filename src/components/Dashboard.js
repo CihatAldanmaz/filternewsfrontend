@@ -166,7 +166,6 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.state.liked);
     return (
       <Gmain>
         <Sgrid>
